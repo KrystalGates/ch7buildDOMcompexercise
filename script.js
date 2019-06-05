@@ -77,30 +77,27 @@ const students = [
 // the h1 depending on the score of the student being below 60, 
 // or above it.
 
-const createStudentComponent = function(name, subject, info) {
+const createStudentComponent = function(student) {
     for (let i = 0; i < students.length; i++) {
+        let student = students[i];
+        let name = students[i].name;
+        let subject = students[i].name;
+        let info = students[i].info;
         let studentComponent = "";
         let grade = "";
-        if (students[i].score >= 60) {
+        if (student.score >= 60) {
             grade = "passing";
-            studentComponent = document.querySelector("#container").innerHTML += `
-            <div class="student">
-            <h1 class="xx-large" "${grade}">${name}</h1>
-            <section class="bordered dashed section--padded">${subject}</section>
-            <aside class="pushRight">${info}</aside>
-            </div>
-            `
         }
-        if else {
+        else {
             grade = "failing";
-            studentComponent = document.querySelector("#container").innerHTML +=  `
-            <div class="student">
-            <h1 class="xx-large" "${grade}">${name}</h1>
-            <section class="bordered dashed section--padded">${subject}</section>
-            <aside class="pushRight">${info}</aside>
-            </div>
-            ` 
         }
+        studentComponent = document.querySelector("#container").innerHTML +=  `
+        <div class="student">
+        <h1 class="xx-large ${grade}">${name}</h1>
+        <section class="bordered dashed section--padded">${subject}</section>
+        <aside class="pushRight">${info}</aside>
+        </div>
+        ` 
     }
 }
 
