@@ -71,34 +71,91 @@ const students = [
         info: "Needs to contribute to in-class discussions",
         score: 95
     }
-]
+] 
 
 // Iterate the array of students, and apply the correct style to 
 // the h1 depending on the score of the student being below 60, 
 // or above it.
 
-const createStudentComponent = function(student) {
-    for (let i = 0; i < students.length; i++) {
-        let student = students[i];
-        let name = students[i].name;
-        let subject = students[i].name;
-        let info = students[i].info;
-        let studentComponent = "";
-        let grade = "";
-        if (student.score >= 60) {
-            grade = "passing";
-        }
-        else {
-            grade = "failing";
-        }
-        studentComponent = document.querySelector("#container").innerHTML +=  `
-        <div class="student">
-        <h1 class="xx-large ${grade}">${name}</h1>
-        <section class="bordered dashed section--padded">${subject}</section>
-        <aside class="pushRight">${info}</aside>
-        </div>
-        ` 
-    }
+// const createStudentComponent = function(grade, name, subject, info){
+//         return `<div class="student">
+//         <h1 class="xx-large ${grade}">${name}</h1>
+//         <section class="bordered dashed section--padded">${subject}</section>
+//         <aside class="pushRight">${info}</aside>
+//         </div>
+//         ` 
+// }
+
+// const studentContainer = document.querySelector("#container");
+
+// students.forEach( function (student) {
+//     let studentComponent= "";
+//     if (student.score >= 60) {
+//         student.grade = "passing";
+//     }
+//     else {
+//         student.grade = "failing";
+//     }
+//     studentComponent= createStudentComponent(student.grade, student.name, student.subject, student.info)
+//     studentContainer.innerHTML+= studentComponent;
+// })
+
+// refactor only using one argument
+
+// const createStudentComponent = function(studentObj){
+//     return `<div class="student">
+//     <h1 class="xx-large ${studentObj.grade}">${studentObj.name}</h1>
+//     <section class="bordered dashed section--padded">${studentObj.subject}</section>
+//     <aside class="pushRight">${studentObj.info}</aside>
+//     </div>
+//     ` 
+// }
+
+const studentContainer = document.querySelector("#container");
+
+// students.forEach( function (student) {
+// let studentComponent= "";
+// if (student.score >= 60) {
+//     student.grade = "passing";
+// }
+// else {
+//     student.grade = "failing";
+// }
+// studentComponent= createStudentComponent(student)
+// studentContainer.innerHTML+= studentComponent;
+// })
+
+// Write functions that build the sub-components 
+// of the larger student component.
+// h1
+// section
+// aside
+// Invoke those functions inside the createStudentComponent function to build the parent <div>.
+
+
+for(i = 0; i < students.length; i++){
+    let studentComponent = "";
+    studentComponent = createStudentComponent(students[i]);
+    studentContainer.innerHTML+=studentComponent
 }
 
-createStudentComponent(students);
+function createStudentComponent(studentObj){
+    return `
+    <div id="student">
+        ${h1(studentObj.name)}
+        ${section(studentObj.subject)}
+        ${aside(studentObj.info)}
+    </div>`
+}
+
+function h1(student){
+    return `<h1>${student}</h1>`
+    }
+
+function section(student){
+    return `<section>${student}</section>`
+}
+
+function aside(student){
+    return `<aside> ${student}</aside>`
+}
